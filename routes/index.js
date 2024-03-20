@@ -17,7 +17,7 @@ const serve = require("./api/serve");
 const router = express.Router();
 
 router.use(
-  `/sicc-api/api/v${process.env.API_VERSION}`,
+  `/service-api/api/v${process.env.API_VERSION}`,
   router.use("/user", user),
   router.use("/profile", profile),
   router.use("/news", news),
