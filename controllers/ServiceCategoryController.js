@@ -118,6 +118,24 @@ const checkLanguage = (req) => {
   return prismaLang;
 };
 
+const cutFroala = (detail) => {
+  let detail_success =
+    detail != null
+      ? detail
+          .replaceAll("Powered by", "")
+          .replaceAll(
+            '<p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">',
+            ""
+          )
+          .replaceAll(
+            '<a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">',
+            ""
+          )
+          .replaceAll("Froala Editor</a></p>", "")
+      : undefined;
+  return detail_success;
+};
+
 const methods = {
   async onGetAll(req, res) {
     try {
@@ -173,8 +191,10 @@ const methods = {
         data: {
           name_th: req.body.name_th,
           name_en: req.body.name_en,
-          detail_th: req.body.detail_th != null ? req.body.detail_th : undefined,
-          detail_en: req.body.detail_en != null ? req.body.detail_en : undefined,
+          detail_th:
+            req.body.detail_th != null ? cutFroala(req.body.detail_th) : undefined,
+          detail_en:
+            req.body.detail_en != null ? cutFroala(req.body.detail_en) : undefined,
           is_publish: Number(req.body.is_publish),
           created_by: "arnonr",
           updated_by: "arnonr",
@@ -197,8 +217,10 @@ const methods = {
         data: {
           name_th: req.body.name_th != null ? req.body.name_th : undefined,
           name_en: req.body.name_en != null ? req.body.name_en : undefined,
-          detail_th: req.body.detail_th != null ? req.body.detail_th : undefined,
-          detail_en: req.body.detail_en != null ? req.body.detail_en : undefined,
+          detail_th:
+            req.body.detail_th != null ? cutFroala(req.body.detail_th) : undefined,
+          detail_en:
+            req.body.detail_en != null ? cutFroala(req.body.detail_en) : undefined,
           is_publish: Number(req.body.is_publish),
           updated_by: "arnonr",
         },
